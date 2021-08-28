@@ -28,7 +28,7 @@ FLASK_ENV=development pipenv run start
 ## Deploy
 
 ```bash
-pipenv run start
+FLASK_ENV=production pipenv run prod
 ```
 
 > This will start the application on port 5000
