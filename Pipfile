@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "==1.1.2"
+flask-marshmallow = "==0.14.0"
+flask-sqlalchemy = "==2.5.0"
+marshmallow-sqlalchemy = "==0.24.1"
+connexion = {extras = ["swagger-ui"], version = "*"}
+flask-cors = "*"
+gunicorn = "*"
+
+[scripts]
+"start" = "python app.py"
+"prod" = "gunicorn -b :8080 --access-logfile - --error-logfile - app:app"
+
+[dev-packages]
+autopep8 = "*"
+
+[requires]
+python_version = "3.9.6"

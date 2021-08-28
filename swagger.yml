@@ -1,0 +1,133 @@
+openapi: 3.0.3
+info:
+  title: Products REST APIs
+  description: Products REST APIs
+  version: "1.0.0"
+servers:
+  - url: http://localhost:5000
+    description: Rest Server showing Swagger and Connexion capability
+paths:
+  /product:
+    get:
+      operationId: src.product.getAll
+      tags:
+        - Product
+      summary: Returns a list of products.
+      description: Returns a list of products.
+      responses:
+        "200": # status code
+          description: Return the entire list of products.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+    post:
+      operationId: src.product.create
+      tags:
+        - Product
+      summary: Create a new Product
+      description: Create a new Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProduct"
+      responses:
+        "201":
+          description: Product Created successfully
+  /product/{id}:
+    get:
+      operationId: src.product.get
+      tags:
+        - Product
+      summary: Return an Product with given ID
+      description: Return an Product with given ID
+      parameters:
+        - name: id
+          in: path
+          description: Product ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Return an Product with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+    delete:
+      operationId: src.product.delete
+      tags:
+        - Product
+      summary: Delete an Product with given ID
+      description: Delete an Product with given ID
+      parameters:
+        - name: id
+          in: path
+          description: Product ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Deleted an Product with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+    put:
+      operationId: src.product.update
+      tags:
+        - Product
+      summary: Update an Product with given ID
+      description: Update an Product with given ID
+      parameters:
+        - name: id
+          in: path
+          description: Product ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProduct"
+      responses:
+        "200": # status code
+          description: Updated an Product with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        price:
+          type: number
+    CreateProduct:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+    UpdateProduct:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
